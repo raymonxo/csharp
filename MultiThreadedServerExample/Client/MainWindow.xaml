@@ -1,0 +1,21 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Client" Height="490.372" Width="573.972">
+    <Grid Margin="0,0,3.4,-2.4">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="sendButton" Content="Send" HorizontalAlignment="Left" Margin="466,15,0,0" VerticalAlignment="Top" Width="75" Click="sendButton_Click"/>
+        <TextBox x:Name="messagesTextBox" HorizontalAlignment="Left" Height="342" Margin="170,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="371" IsReadOnly="True"/>
+        <Label Content="Messages:" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top"/>
+        <Label Content="Port:" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="portTextBox" HorizontalAlignment="Left" Height="23" Margin="170,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Port to which client should connect" Text="8000"/>
+        <Label Content="# Requests:" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="numRequestsTextBox" HorizontalAlignment="Left" Height="23" Margin="170,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Number of parallel requests that should be sent to server" Text="10"/>
+        <Label Content="Server:" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="serverTextBox" HorizontalAlignment="Left" Height="23" Margin="170,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Server to which client should connect" Text="127.0.0.1"/>
+
+    </Grid>
+</Window>
