@@ -72,7 +72,7 @@ namespace RayMitchell.ProjectEuler.Problems
 
         private static int Max(params int[] values)
         {
-            return values.Aggregate(0, (acc, val) => System.Math.Max(acc, val));
+            return values.Aggregate(0, (acc, val) => Math.Max(acc, val));
         }
 
         private static int Prod(params int[] values)
