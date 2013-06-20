@@ -36,7 +36,7 @@ using System.Linq;
 ///
 /// Answer: 70600674
 /// </summary>
-namespace RayMitchell.ProjectEuler
+namespace RayMitchell.ProjectEuler.Problems
 {
     public class Problem11
     {
@@ -70,20 +70,9 @@ namespace RayMitchell.ProjectEuler
 
         private const int SliceSize = 4;
 
-        // Returns a slice from the Grid starting at position r, c and
-        // stepping to each new element by rstep & cstep
-        private static int[] Slice(int r, int c, int rstep, int cstep)
+        private static int Maximum(params int[] values)
         {
-            var ls = new List<int>();
-
-            for (int i = 0;
-                 i < SliceSize && r >= 0 && r < Rows && c >= 0 && c < Cols;
-                 ++i, r += rstep, c += cstep)
-            {
-                ls.Add(Grid[r, c]);
-            }
-
-            return ls.ToArray();
+            return values.Aggregate(0, (acc, val) => System.Math.Max(acc, val));
         }
 
         private static int Product(params int[] values)
@@ -91,29 +80,31 @@ namespace RayMitchell.ProjectEuler
             return values.Aggregate(1, (acc, val) => acc * val);
         }
 
-        private static int Maximum(params int[] values)
+        // Returns a slice from the Grid starting at position r, c and
+        // stepping to each new element by rstep & cstep
+        private static int[] Slice(int r, int c, int rstep, int cstep)
         {
-            return values.Aggregate(0, (acc, val) => Math.Max(acc, val));
+            var ls = new List<int>();
+
+            for (int i = 0;
+                    i < SliceSize && r >= 0 && r < Rows && c >= 0 && c < Cols;
+                    ++i, r += rstep, c += cstep)
+                ls.Add(Grid[r, c]);
+
+            return ls.ToArray();
         }
 
         private static int Solve()
         {
             var maxProd = 0;
 
-            // For every row
             for (var r = 0; r < Rows; ++r)
-            {
-                // For every column
                 for (var c = 0; c < Cols; ++c)
-                {
-                    // Update max prod to largest found so far
                     maxProd = Maximum(Product(Slice(r, c, 0, 1)),   // East
                                       Product(Slice(r, c, 1, 1)),   // South-east
                                       Product(Slice(r, c, 1, 0)),   // South
                                       Product(Slice(r, c, 1, -1)),  // South-west
                                       maxProd);
-                }
-            }
 
             return maxProd;
         }
