@@ -70,12 +70,12 @@ namespace RayMitchell.ProjectEuler.Problems
 
         private const int SliceSize = 4;
 
-        private static int Maximum(params int[] values)
+        private static int Max(params int[] values)
         {
             return values.Aggregate(0, (acc, val) => System.Math.Max(acc, val));
         }
 
-        private static int Product(params int[] values)
+        private static int Prod(params int[] values)
         {
             return values.Aggregate(1, (acc, val) => acc * val);
         }
@@ -100,11 +100,11 @@ namespace RayMitchell.ProjectEuler.Problems
 
             for (var r = 0; r < Rows; ++r)
                 for (var c = 0; c < Cols; ++c)
-                    maxProd = Maximum(Product(Slice(r, c, 0, 1)),   // East
-                                      Product(Slice(r, c, 1, 1)),   // South-east
-                                      Product(Slice(r, c, 1, 0)),   // South
-                                      Product(Slice(r, c, 1, -1)),  // South-west
-                                      maxProd);
+                    maxProd = Max(Prod(Slice(r, c, 0, 1)),   // East
+                                  Prod(Slice(r, c, 1, 1)),   // South-east
+                                  Prod(Slice(r, c, 1, 0)),   // South
+                                  Prod(Slice(r, c, 1, -1)),  // South-west
+                                  maxProd);
 
             return maxProd;
         }
