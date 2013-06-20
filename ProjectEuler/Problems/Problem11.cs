@@ -86,7 +86,7 @@ namespace RayMitchell.ProjectEuler.Problems
         {
             var ls = new List<int>();
 
-            for (int i = 0;
+            for (var i = 0;
                     i < SliceSize && r >= 0 && r < Rows && c >= 0 && c < Cols;
                     ++i, r += rstep, c += cstep)
                 ls.Add(Grid[r, c]);
