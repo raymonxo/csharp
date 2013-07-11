@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayMitchell.ProejctEuler.Problems", "Problems\RayMitchell.ProejctEuler.Problems.csproj", "{4B9AC514-B531-4CB2-98F3-D5E203B371DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Problems", "Problems\Problems.csproj", "{4B9AC514-B531-4CB2-98F3-D5E203B371DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

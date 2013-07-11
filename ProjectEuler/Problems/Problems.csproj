@@ -8,8 +8,8 @@
     <ProjectGuid>{4B9AC514-B531-4CB2-98F3-D5E203B371DD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RayMitchell.ProejctEuler.Problems</RootNamespace>
-    <AssemblyName>RayMitchell.ProejctEuler.Problems</AssemblyName>
+    <RootNamespace>RayMitchell.ProejctEuler</RootNamespace>
+    <AssemblyName>RayMitchell.ProjectEuler</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Problem11.cs" />
+    <Compile Include="Problem12.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
