@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-using System.Text;
 
 namespace RayMitchell.ProjectEuler
 {
@@ -53,9 +51,9 @@ namespace RayMitchell.ProjectEuler
 
         public static int Solve()
         {
-            foreach (var i in TriangleNumbers())
-                if (Divisors(i).ToArray().Length >= 500)
-                    return i;
+            foreach (var t in TriangleNumbers())
+                if (Divisors(t).ToArray().Length >= 500)
+                    return t;
 
             throw new InvalidOperationException();  // Should never be reached
         }
