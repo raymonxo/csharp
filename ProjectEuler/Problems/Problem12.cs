@@ -33,7 +33,7 @@ namespace RayMitchell.ProjectEuler
     /// </summary>
     public class Problem12
     {
-        public static IEnumerable<int> Divisors(int value)
+        private static IEnumerable<int> Divisors(int value)
         {
             for (int i = 1, max = (int)Math.Sqrt(value); i <= max; ++i)
                 if (value % i == 0)
@@ -43,15 +43,18 @@ namespace RayMitchell.ProjectEuler
                 }
         }
 
-        public static IEnumerable<int> TriangleNumbers()
+        private static IEnumerable<int> TriangleNumbers
         {
-            for (int i = 1, t = 1; ; ++i, t += i)
-                yield return t;
+            get
+            {
+                for (int i = 1, t = 1; ; ++i, t += i)
+                    yield return t;
+            }
         }
 
         public static int Solve()
         {
-            foreach (var t in TriangleNumbers())
+            foreach (var t in TriangleNumbers)
                 if (Divisors(t).ToArray().Length >= 500)
                     return t;
 
