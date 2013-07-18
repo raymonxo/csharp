@@ -217,9 +217,19 @@ namespace RayMitchell.ProjectEuler
 
         public static string Solve()
         {
+            return (from n in Numbers.Split('\n')
+                    select BigInteger.Parse(n))
+                   .Sum()
+                   .ToString()
+                   .Substring(0, 10);
+        }
+
+        // Same as previous solution except uses only extension method syntax
+        public static string Solve2()
+        {
             return Numbers.Split('\n')
                           .Select(BigInteger.Parse)
-                          .Aggregate((a, x) => a + x)
+                          .Sum()
                           .ToString()
                           .Substring(0, 10);
         }
