@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using RayMitchell.ProjectEuler.Helpers;
+
 namespace RayMitchell.ProjectEuler.Problems
 {
+    
+
     /// <summary>
     /// Project Euler, Problem 12 (http://projecteuler.net/problem=12).
     /// 
@@ -31,18 +35,8 @@ namespace RayMitchell.ProjectEuler.Problems
     /// 
     /// Answer: 76576500
     /// </summary>
-    public class Problem12
+    public static class Problem12
     {
-        private static IEnumerable<int> Divisors(int value)
-        {
-            for (int i = 1, max = (int)Math.Sqrt(value); i <= max; ++i)
-                if (value % i == 0)
-                {
-                    yield return i;
-                    yield return value / i;
-                }
-        }
-
         private static IEnumerable<int> TriangleNumbers
         {
             get
@@ -55,7 +49,7 @@ namespace RayMitchell.ProjectEuler.Problems
         public static int Solve()
         {
             foreach (var t in TriangleNumbers)
-                if (Divisors(t).ToArray().Length >= 500)
+                if (t.Divisors().ToArray().Length >= 500)
                     return t;
 
             throw new InvalidOperationException();  // Should never be reached
