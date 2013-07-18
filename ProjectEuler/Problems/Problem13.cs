@@ -215,7 +215,8 @@ namespace RayMitchell.ProjectEuler
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690";
 
-        public static string Solve()
+        // Solution #1 - Mix of LINQ query syntax and extension method syntax
+        public static string Solve1()
         {
             return (from n in Numbers.Split('\n')
                     select BigInteger.Parse(n))
@@ -224,7 +225,7 @@ namespace RayMitchell.ProjectEuler
                    .Substring(0, 10);
         }
 
-        // Same as previous solution except uses only extension method syntax
+        // Solution #2 - LINQ extension method syntax only
         public static string Solve2()
         {
             return Numbers.Split('\n')
