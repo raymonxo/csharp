@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Numerics;
 
-namespace RayMitchell.ProjectEuler
+using RayMitchell.ProjectEuler.Helpers;
+
+namespace RayMitchell.ProjectEuler.Problems
 {
     /// <summary>
     /// Project Euler, Problem 13 (http://projecteuler.net/problem=13).

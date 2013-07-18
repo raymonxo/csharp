@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace RayMitchell.ProjectEuler
+namespace RayMitchell.ProjectEuler.Problems
 {
     class Program
     {
@@ -12,6 +9,7 @@ namespace RayMitchell.ProjectEuler
             Console.WriteLine("Problem 11: " + Problem11.Solve());
             Console.WriteLine("Problem 12: " + Problem12.Solve());
             Console.WriteLine("Problem 13: " + Problem13.Solve1());
+            Console.WriteLine("Problem 14: " + Problem14.Solve());
         }
     }
 }

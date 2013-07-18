@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RayMitchell.ProjectEuler
+namespace RayMitchell.ProjectEuler.Problems
 {
     /// <summary>
     /// Project Euler, Problem 11 (http://projecteuler.net/problem=11).
