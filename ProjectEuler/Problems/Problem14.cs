@@ -27,25 +27,38 @@ namespace RayMitchell.ProjectEuler.Problems
     /// </summary>
     public class Problem14
     {
-        private static class CollatzSequences
-        {
-            // Map from n to collatz sequence length
-            private static readonly IDictionary<long, long> Lengths =
-                new Dictionary<long, long> { { 1, 1 } };
-
-            public static long Length(long n)
-            {
-                if (!Lengths.ContainsKey(n))
-                    Lengths.Add(n, 1 + Length(n % 2 == 0 ? n / 2 : 3 * n + 1));
-                return Lengths[n];
-            }
-        }
-
         public static long Solve()
         {
-            return (from n in Enumerable.Range(1, 999999)
-                    orderby CollatzSequences.Length(n) descending
-                    select n).First();
+            return (from c in CollatzSequence.Range(1, 1000000)
+                    orderby c.Length descending
+                    select c.StartingNumber).First();
         }
+    }
+
+    class CollatzSequence
+    {
+        public CollatzSequence(long start) { _start = start; }
+
+        public long StartingNumber { get { return _start; } }
+
+        public long Length { get { return GetLength(_start); } }
+
+        public static IEnumerable<CollatzSequence> Range(long start, long count)
+        {
+            while (count-- > 0)
+                yield return new CollatzSequence(start++);
+        }
+
+        private static long GetLength(long n)
+        {
+            if (!Lengths.ContainsKey(n))
+                Lengths.Add(n, 1 + GetLength(n % 2 == 0 ? n / 2 : 3 * n + 1));
+            return Lengths[n];
+        }
+
+        private readonly long _start;
+
+        private static readonly IDictionary<long, long> Lengths =
+            new Dictionary<long, long> { { 1, 1 } };
     }
 }
