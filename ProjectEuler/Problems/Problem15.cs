@@ -30,7 +30,7 @@ namespace RayMitchell.ProjectEuler.Problems
             // If cache doesn't contain routes for grid
             if (!RoutesCache.ContainsKey(g))
             {
-                // Compute routes for grid
+                // Compute routes for grid (1 route if any dimension is 0)
                 long routes = g.X == 0 || g.Y == 0
                         ? 1
                         : GetRoutes(new Grid(g.X, g.Y - 1))
