@@ -13,7 +13,7 @@ namespace RayMitchell.ProjectEuler.Problems
     /// </summary>
     public class Problem15
     {
-        public static long Solve() { return new Grid(20, 20).Routes; }
+        public static long Solve() { return new Grid(20, 20).RouteCount; }
     }
 
     struct Grid
@@ -23,29 +23,29 @@ namespace RayMitchell.ProjectEuler.Problems
 
         public Grid(long x, long y) : this() { X = x; Y = y; }
 
-        public long Routes { get { return GetRoutes(this); } }
+        public long RouteCount { get { return GetRouteCount(this); } }
 
-        private static long GetRoutes(Grid g)
+        private static long GetRouteCount(Grid g)
         {
-            // If cache doesn't contain routes for grid
-            if (!RoutesCache.ContainsKey(g))
+            // If cache doesn't contain route count for grid
+            if (!RouteCountCache.ContainsKey(g))
             {
-                // Compute routes for grid (1 route if any dimension is 0)
+                // Compute route count for grid (1 route if any dimension is 0)
                 long routes = g.X == 0 || g.Y == 0
                         ? 1
-                        : GetRoutes(new Grid(g.X, g.Y - 1))
-                          + GetRoutes(new Grid(g.X - 1, g.Y));
+                        : GetRouteCount(new Grid(g.X, g.Y - 1))
+                          + GetRouteCount(new Grid(g.X - 1, g.Y));
 
-                // Cache routes for grid and its mirror
-                RoutesCache.Add(g, routes);
+                // Cache route count for grid and its mirror
+                RouteCountCache.Add(g, routes);
                 if (g.X != g.Y)
-                    RoutesCache.Add(new Grid(g.Y, g.X), routes);
+                    RouteCountCache.Add(new Grid(g.Y, g.X), routes);
             }
 
-            return RoutesCache[g];
+            return RouteCountCache[g];
         }
 
-         private static readonly IDictionary<Grid, long> RoutesCache
+        private static readonly IDictionary<Grid, long> RouteCountCache
             = new Dictionary<Grid, long>();
     }
 }
