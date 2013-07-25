@@ -30,9 +30,9 @@ namespace RayMitchell.ProjectEuler.Problems
             // If cache doesn't contain route count for grid
             if (!RouteCounts.ContainsKey(g))
             {
-                // Compute route count for grid (1 route if any dimension is 0)
+                // Compute route count for grid
                 long routes = g.X == 0 || g.Y == 0
-                        ? 1
+                        ? 1  // Only one route if either dimension is zero
                         : GetRouteCount(new Grid(g.X, g.Y - 1))
                           + GetRouteCount(new Grid(g.X - 1, g.Y));
 
