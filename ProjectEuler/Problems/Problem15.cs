@@ -21,21 +21,22 @@ namespace RayMitchell.ProjectEuler.Problems
 
     struct Grid
     {
-        // Cache mapping grid to route count
-        private static readonly IDictionary<Grid, long> RouteCounts
-            = new Dictionary<Grid, long>();
-
-        public Grid(long x, long y) : this()
+        public Grid(long x, long y)
+            : this()
         {
             X = x;
             Y = y;
         }
 
+        public long RouteCount { get { return GetRouteCount(this); } }
+
+        // Cache mapping grid to route count
+        private static readonly IDictionary<Grid, long> RouteCounts
+            = new Dictionary<Grid, long>();
+        
         public long X { get; private set; }
 
         public long Y { get; private set; }
-        
-        public long RouteCount { get { return GetRouteCount(this); } }
 
         private static long GetRouteCount(Grid g)
         {
