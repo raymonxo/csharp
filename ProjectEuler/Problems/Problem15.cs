@@ -13,25 +13,37 @@ namespace RayMitchell.ProjectEuler.Problems
     /// </summary>
     public class Problem15
     {
-        public static long Solve() { return new Grid(20, 20).RouteCount; }
+        public static long Solve()
+        {
+            return new Grid(20, 20).RouteCount;
+        }
     }
 
     struct Grid
     {
-        public long X { get; set; }
-        public long Y { get; set; }
+        // Cache mapping grid to route count
+        private static readonly IDictionary<Grid, long> RouteCounts
+            = new Dictionary<Grid, long>();
 
-        public Grid(long x, long y) : this() { X = x; Y = y; }
+        public Grid(long x, long y) : this()
+        {
+            X = x;
+            Y = y;
+        }
 
+        public long X { get; private set; }
+
+        public long Y { get; private set; }
+        
         public long RouteCount { get { return GetRouteCount(this); } }
 
         private static long GetRouteCount(Grid g)
         {
-            // If cache doesn't contain route count for grid
+            // If cache doesn't contain entry grid
             if (!RouteCounts.ContainsKey(g))
             {
                 // Compute route count for grid
-                long routes = g.X == 0 || g.Y == 0
+                var routes = g.X == 0 || g.Y == 0
                         ? 1  // Only one route if either dimension is zero
                         : GetRouteCount(new Grid(g.X, g.Y - 1))
                           + GetRouteCount(new Grid(g.X - 1, g.Y));
@@ -44,8 +56,5 @@ namespace RayMitchell.ProjectEuler.Problems
 
             return RouteCounts[g];
         }
-
-        private static readonly IDictionary<Grid, long> RouteCounts
-            = new Dictionary<Grid, long>();
     }
 }
