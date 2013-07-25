@@ -37,11 +37,14 @@ namespace RayMitchell.ProjectEuler.Problems
 
     class CollatzSequence
     {
-        public CollatzSequence(long start) { _start = start; }
+        public CollatzSequence(long start)
+        {
+            StartingNumber = start;
+        }
 
-        public long StartingNumber { get { return _start; } }
-
-        public long Length { get { return GetLength(_start); } }
+        public long StartingNumber { get; private set; }
+        
+        public long Length { get { return GetLength(StartingNumber); } }
 
         public static IEnumerable<CollatzSequence> Range(long start, long count)
         {
@@ -55,8 +58,6 @@ namespace RayMitchell.ProjectEuler.Problems
                 Lengths.Add(n, 1 + GetLength(n % 2 == 0 ? n / 2 : 3 * n + 1));
             return Lengths[n];
         }
-
-        private readonly long _start;
 
         private static readonly IDictionary<long, long> Lengths =
             new Dictionary<long, long> { { 1, 1 } };
