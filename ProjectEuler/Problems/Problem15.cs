@@ -28,7 +28,7 @@ namespace RayMitchell.ProjectEuler.Problems
         private static long GetRouteCount(Grid g)
         {
             // If cache doesn't contain route count for grid
-            if (!RouteCountCache.ContainsKey(g))
+            if (!RouteCounts.ContainsKey(g))
             {
                 // Compute route count for grid (1 route if any dimension is 0)
                 long routes = g.X == 0 || g.Y == 0
@@ -37,15 +37,15 @@ namespace RayMitchell.ProjectEuler.Problems
                           + GetRouteCount(new Grid(g.X - 1, g.Y));
 
                 // Cache route count for grid and its mirror
-                RouteCountCache.Add(g, routes);
+                RouteCounts.Add(g, routes);
                 if (g.X != g.Y)
-                    RouteCountCache.Add(new Grid(g.Y, g.X), routes);
+                    RouteCounts.Add(new Grid(g.Y, g.X), routes);
             }
 
-            return RouteCountCache[g];
+            return RouteCounts[g];
         }
 
-        private static readonly IDictionary<Grid, long> RouteCountCache
+        private static readonly IDictionary<Grid, long> RouteCounts
             = new Dictionary<Grid, long>();
     }
 }
