@@ -45,15 +45,7 @@ namespace RayMitchell.ProjectEuler.Problems
     /// </summary>
     public class Problem18
     {
-        public static int Solve()
-        {
-            return Triangle.MaxRouteSum();
-        }
-    }
-
-    class Triangle
-    {
-        private static readonly int[][] Array = new []
+        private static readonly int[][] Triangle = new []
             {
                 new[] {75},
                 new[] {95, 64},
@@ -72,17 +64,17 @@ namespace RayMitchell.ProjectEuler.Problems
                 new[] {04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23}
             };
 
-        public static int MaxRouteSum()
-        {
-            return MaxRouteSum(0, 0);
-        }
-
         private static int MaxRouteSum(int r, int c)
         {
-            if (r == Array.Length)
+            if (r == Triangle.Length)
                 return 0;
-            return Array[r][c] + Math.Max(MaxRouteSum(r + 1, c),
-                                          MaxRouteSum(r + 1, c + 1));
+            return Triangle[r][c] + Math.Max(MaxRouteSum(r + 1, c),
+                                             MaxRouteSum(r + 1, c + 1));
+        }
+
+        public static int Solve()
+        {
+            return MaxRouteSum(0, 0);
         }
     }
 }
