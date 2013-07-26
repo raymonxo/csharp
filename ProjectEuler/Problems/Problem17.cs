@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -26,53 +25,70 @@ namespace RayMitchell.ProjectEuler.Problems
         public static int Solve()
         {
             return (from n in Enumerable.Range(1, 1000)
-                    select new Number(n).Name)
+                    select n.EnglishName())
                    .SelectMany(c => c.Where(x => x != ' '
                                               && x != '-')).Count();
         }
     }
 
-    class Number
+    static class NumberNames
     {
-        public Number(int value)
+        // Returns English name of the integer
+        public static string EnglishName(this int n)
         {
-            Value = value;
+            var b = new StringBuilder();
+
+            // Places > 10's
+            for (var place = n.MostSignificantPlace(); place > 10; place /= 10)
+            {
+                if (!n.HasDigit(place)) continue;
+                if (n >= place * 10)
+                    b.Append(" ");
+                b.Append(Names[n.Digit(place)] + " " + Names[place]);
+            }
+
+            // 10's and 1's places
+            if ((n.HasDigit(10) || n.HasDigit(1)) && n >= 100)
+                b.Append(" and ");
+            if (n.HasDigit(10))
+            {
+                if (n.Digit(10) == 1)
+                    b.Append(Names[n.Digit(10) * 10 + n.Digit(1)]);
+                else
+                {
+                    b.Append(Names[n.Digit(10) * 10]);
+                    if (n.HasDigit(1))
+                        b.Append("-" + Names[n.Digit(1)]);
+                }
+            }
+            else if (n.HasDigit(1))
+                b.Append(Names[n.Digit(1)]);
+
+            return b.ToString();
         }
 
-        public string Name
+        // Returns value of digit at given place
+        private static int Digit(this int n, int place)
         {
-            get
+            return n % (place * 10) / place;
+        }
+
+        // Returns whether a non-zero digit exists at place
+        private static bool HasDigit(this int n, int place)
+        {
+            return n.Digit(place) >= 1;
+        }
+
+        // Returns the most significant place (e.g. 9832 => 1000)
+        private static int MostSignificantPlace(this int n)
+        {
+            var msp = 1;
+            while (n > 0)
             {
-                var b = new StringBuilder();
-
-                // Positions > 10's
-                for (var pos = MostSignificantPosition(); pos > 10; pos /= 10)
-                {
-                    if (!HasDigit(pos)) continue;
-                    if (Value >= pos * 10)
-                        b.Append(" ");
-                    b.Append(Names[Digit(pos)] + " " + Names[pos]);
-                }
-
-                // 10's and 1's positions
-                if ((HasDigit(10) || HasDigit(1)) && Value >= 100)
-                    b.Append(" and ");
-                if (HasDigit(10))
-                {
-                    if (Digit(10) == 1)
-                        b.Append(Names[Digit(10) * 10 + Digit(1)]);
-                    else
-                    {
-                        b.Append(Names[Digit(10) * 10]);
-                        if (HasDigit(1))
-                            b.Append("-" + Names[Digit(1)]);
-                    }
-                }
-                else if (HasDigit(1))
-                    b.Append(Names[Digit(1)]);
-
-                return b.ToString();
+                msp *= 10;
+                n /= 10;
             }
+            return msp;
         }
 
         private static readonly IDictionary<int, string> Names =
@@ -110,28 +126,5 @@ namespace RayMitchell.ProjectEuler.Problems
                     { 1000, "thousand" },
                     // Add more entries to handle larger numbers
                 };
-
-        public int Value { get; private set; }
-
-        // Returns digit value at given position
-        private int Digit(int position)
-        {
-            return Value % (position * 10) / position;
-        }
-
-        // Returns whether a non-zero digit exists at position
-        private bool HasDigit(int position)
-        {
-            return Digit(position) >= 1;
-        }
-
-        // Returns value of most significant position (e.g. 1000)
-        private int MostSignificantPosition()
-        {
-            var msp = 1;
-            for (var v = Value; v > 0; v /= 10)
-                msp *= 10;
-            return msp;
-        }
     }
 }
