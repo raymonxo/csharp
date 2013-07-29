@@ -64,6 +64,8 @@ namespace RayMitchell.ProjectEuler.Problems
     {
         public Period(int rank, int value)
         {
+            if (rank < 1)
+                throw new ArgumentOutOfRangeException("rank");
             if (value < 0 || value > 1000)
                 throw new ArgumentOutOfRangeException("value");
 
