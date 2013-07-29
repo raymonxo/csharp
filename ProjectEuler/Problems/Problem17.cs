@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -31,67 +32,99 @@ namespace RayMitchell.ProjectEuler.Problems
         }
     }
 
-    static class NumberNames
+    public static class MathExtensions
     {
-        // Returns English name of the integer
+        /// <summary>
+        /// Returns English name of the integer.
+        ///
+        /// Note, although this problem only asked to support English names
+        /// for numbers up to 1000, this solution works in general. For
+        /// example, calling EnglishName on 1234567890 will return the string:
+        ///
+        ///     "one billion two hundred thirty-four million five
+        ///       hundred sixty-seven thousand eight hundred and ninety"
+        /// </summary>
         public static string EnglishName(this int n)
         {
             var b = new StringBuilder();
-
-            // Places > 10's
-            for (var place = n.MostSignificantPlace(); place > 10; place /= 10)
-            {
-                if (!n.HasDigit(place)) continue;
-                if (n >= place * 10)
-                    b.Append(" ");
-                b.Append(Names[n.Digit(place)] + " " + Names[place]);
-            }
-
-            // 10's and 1's places
-            if ((n.HasDigit(10) || n.HasDigit(1)) && n >= 100)
-                b.Append(" and ");
-            if (n.HasDigit(10))
-            {
-                if (n.Digit(10) == 1)
-                    b.Append(Names[n.Digit(10) * 10 + n.Digit(1)]);
-                else
-                {
-                    b.Append(Names[n.Digit(10) * 10]);
-                    if (n.HasDigit(1))
-                        b.Append("-" + Names[n.Digit(1)]);
-                }
-            }
-            else if (n.HasDigit(1))
-                b.Append(Names[n.Digit(1)]);
-
+            foreach (var p in n.Periods())
+                b.Append((b.Length > 0 ? " " : "") + p.EnglishName);
             return b.ToString();
         }
+    }
 
-        // Returns value of digit at given place
-        private static int Digit(this int n, int place)
+    /// <summary>
+    /// Represents a period (3 digit sequence) within an integer.  For example,
+    /// the number 123,456,789 contains 3 periods:
+    ///     * 789 is the 1st period; it's name is "unit"
+    ///     * 456 is the 2nd period; it's name is "thousand"
+    ///     * 123 is the 3rd period; it's name is "million"
+    /// </summary>
+    class Period
+    {
+        public Period(int rank, int value)
         {
-            return n % (place * 10) / place;
+            if (value < 0 || value > 1000)
+                throw new ArgumentOutOfRangeException("value");
+
+            Rank = rank;
+            Value = value;
         }
 
-        // Returns whether a non-zero digit exists at place
-        private static bool HasDigit(this int n, int place)
+        public string EnglishName
         {
-            return n.Digit(place) >= 1;
-        }
-
-        // Returns the most significant place (e.g. 9832 => 1000)
-        private static int MostSignificantPlace(this int n)
-        {
-            var msp = 1;
-            while (n > 0)
+            get
             {
-                msp *= 10;
-                n /= 10;
+                var b = new StringBuilder();
+
+                // 100's place
+                if (HasHundreds)
+                    b.Append(NumberNames[Hundreds] + " " + NumberNames[100]);
+
+                // 10's and 1's place
+                if (HasHundreds && (HasTens || HasOnes))
+                {
+                    b.Append(" ");
+                    if (Rank == 1)
+                        b.Append("and ");
+                }
+                if (HasTens)
+                {
+                    if (Tens == 1)
+                        b.Append(NumberNames[Tens * 10 + Ones]);
+                    else
+                    {
+                        b.Append(NumberNames[Tens * 10]);
+                        if (HasOnes)
+                            b.Append("-" + NumberNames[Ones]);
+                    }
+                }
+                else if (HasOnes)
+                    b.Append(NumberNames[Ones]);
+
+                // Period name
+                if (Rank != 1)
+                    b.Append(" " + RankNames[Rank]);
+
+                return b.ToString();
             }
-            return msp;
         }
 
-        private static readonly IDictionary<int, string> Names =
+        public int Rank { get; private set; }
+
+        public int Value { get; private set; }
+
+        // Return the digit at the given place
+        private int Ones { get { return Digit(1); } }
+        private int Tens { get { return Digit(10); } }
+        private int Hundreds { get { return Digit(100); } }
+
+        // Return whether the digit at the given place is non-zero
+        private bool HasOnes { get { return Ones > 0; } }
+        private bool HasTens { get { return Tens > 0; } }
+        private bool HasHundreds { get { return Hundreds > 0; } }
+
+        private static readonly IDictionary<int, string> NumberNames =
             new Dictionary<int, string>
                 {
                     { 0, "zero" },
@@ -123,8 +156,32 @@ namespace RayMitchell.ProjectEuler.Problems
                     { 80, "eighty" },
                     { 90, "ninety" },
                     { 100, "hundred" },
-                    { 1000, "thousand" },
-                    // Add more entries to handle larger numbers
                 };
+
+        private static readonly IDictionary<int, string> RankNames =
+            new Dictionary<int, string>
+                {
+                    { 1, "unit" },
+                    { 2, "thousand" },
+                    { 3, "million" },
+                    { 4, "billion" },
+                    { 5, "trillion" },
+                    // Add more entries to handle more periods
+                };
+
+        private int Digit(int place) { return Value % (place * 10) / place; }
+    }
+
+    static class PeriodExtensions
+    {
+        // Returns sequence of the Periods of the integer.
+        // e.g. 123456789 will return 123, 456, 789
+        public static IEnumerable<Period> Periods(this int n)
+        {
+            var periods = new List<Period>();
+            for (int rank = 1; n > 0; ++rank, n /= 1000)
+                periods.Insert(0, new Period(rank, n % 1000));
+            return periods;
+        }
     }
 }
