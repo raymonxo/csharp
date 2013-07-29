@@ -105,7 +105,7 @@ namespace RayMitchell.ProjectEuler.Problems
                     b.Append(NumberNames[Ones]);
 
                 // Period name
-                if (Rank != 1)
+                if ((HasHundreds || HasTens || HasOnes) && Rank != 1)
                     b.Append(" " + RankNames[Rank]);
 
                 return b.ToString();
