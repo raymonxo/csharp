@@ -23,7 +23,7 @@ namespace RayMitchell.ProjectEuler.Problems
         {
             // Factorial
             Func<int, BigInteger> factorial = null;
-            factorial = x => x <= 1 ? 1 : x * factorial(x - 1);
+            factorial = n => n <= 1 ? 1 : n * factorial(n - 1);
 
             // Solution
             return (int)(from c in factorial(100).ToString()
