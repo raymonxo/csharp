@@ -21,11 +21,9 @@ namespace RayMitchell.ProjectEuler.Problems
     {
         public static int Solve()
         {
-            // Factorial
             Func<int, BigInteger> factorial = null;
             factorial = n => n <= 1 ? 1 : n * factorial(n - 1);
 
-            // Solution
             return (int)(from c in factorial(100).ToString()
                          select Char.GetNumericValue(c)).Sum();
         }
