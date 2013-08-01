@@ -28,7 +28,7 @@ namespace RayMitchell.ProjectEuler.Problems
                     select new
                     {
                         N = n,
-                        D = n.Divisors().Where(x => x != n).Distinct().Sum()
+                        D = n.ProperDivisors().Sum()
                     };
             return (from a in q
                     join b in q on a.D equals b.N

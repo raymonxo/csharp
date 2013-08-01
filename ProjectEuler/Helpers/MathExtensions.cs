@@ -17,6 +17,11 @@ namespace RayMitchell.ProjectEuler.Helpers
                 }
         }
 
+        public static IEnumerable<int> ProperDivisors(this int value)
+        {
+            return value.Divisors().Where(x => x != value).Distinct();
+        }
+
         public static BigInteger Sum(this IEnumerable<BigInteger> source)
         {
             if (source == null)
