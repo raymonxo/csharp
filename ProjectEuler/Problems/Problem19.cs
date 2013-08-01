@@ -5,6 +5,8 @@ using System.Linq;
 namespace RayMitchell.ProjectEuler.Problems
 {
     /// <summary>
+    /// Project Euler, Problem 19 (http://projecteuler.net/problem=19).
+    /// 
     /// You are given the following information, but you may prefer to do
     /// some research for yourself.
     ///

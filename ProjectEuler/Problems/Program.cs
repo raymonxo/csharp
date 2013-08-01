@@ -16,6 +16,7 @@ namespace RayMitchell.ProjectEuler.Problems
             Console.WriteLine("Problem 18: " + Problem18.Solve());
             Console.WriteLine("Problem 19: " + Problem19.Solve());
             Console.WriteLine("Problem 20: " + Problem20.Solve());
+            Console.WriteLine("Problem 21: " + Problem21.Solve());
         }
     }
 }

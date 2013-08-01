@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Text;
 
 namespace RayMitchell.ProjectEuler.Problems
 {
     /// <summary>
+    /// Project Euler, Problem 20 (http://projecteuler.net/problem=20).
+    /// 
     /// n! means n × (n − 1) × ... × 3 × 2 × 1
     ///
     /// For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,
