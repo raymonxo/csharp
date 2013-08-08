@@ -51,6 +51,16 @@ namespace RayMitchell.ProjectEuler.Problems
                 b.Append((b.Length > 0 ? " " : "") + p.EnglishName);
             return b.ToString();
         }
+
+        // Returns sequence of the integer's Periods.
+        // e.g. 123456789 will return 123, 456, 789
+        private static IEnumerable<Period> Periods(this int n)
+        {
+            var periods = new List<Period>();
+            for (int rank = 1; n > 0; ++rank, n /= 1000)
+                periods.Insert(0, new Period(rank, n % 1000));
+            return periods;
+        }
     }
 
     /// <summary>
@@ -172,18 +182,5 @@ namespace RayMitchell.ProjectEuler.Problems
                 };
 
         private int Digit(int place) { return Value % (place * 10) / place; }
-    }
-
-    static class PeriodExtensions
-    {
-        // Returns sequence of the Periods of the integer.
-        // e.g. 123456789 will return 123, 456, 789
-        public static IEnumerable<Period> Periods(this int n)
-        {
-            var periods = new List<Period>();
-            for (int rank = 1; n > 0; ++rank, n /= 1000)
-                periods.Insert(0, new Period(rank, n % 1000));
-            return periods;
-        }
     }
 }
