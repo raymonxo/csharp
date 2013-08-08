@@ -63,10 +63,10 @@ namespace RayMitchell.ProjectEuler.Problems
 
         private static int MaxRouteSum(int r, int c)
         {
-            if (r == Triangle.Length)
-                return 0;
-            return Triangle[r][c] + Math.Max(MaxRouteSum(r + 1, c),
-                                             MaxRouteSum(r + 1, c + 1));
+            return r == Triangle.Length
+                ? 0
+                : Triangle[r][c] + Math.Max(MaxRouteSum(r + 1, c),
+                                            MaxRouteSum(r + 1, c + 1));
         }
 
         public static int Solve()
