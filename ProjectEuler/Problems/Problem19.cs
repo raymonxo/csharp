@@ -29,14 +29,12 @@ namespace RayMitchell.ProjectEuler.Problems
     {
         public static int Solve()
         {
-            return (from d in new DateTime(1901, 1, 1).DaysUpTo(
-                              new DateTime(2000, 12, 31))
+            return (from d in new DateTime(1901, 1, 1).DaysUpTo(new DateTime(2000, 12, 31))
                     where d.Day == 1 && d.DayOfWeek == DayOfWeek.Sunday
                     select d).Count();
         }
 
-        public static IEnumerable<DateTime> DaysUpTo(this DateTime from,
-                                                     DateTime to)
+        public static IEnumerable<DateTime> DaysUpTo(this DateTime from, DateTime to)
         {
             for (var i = from; i <= to; i = i.AddDays(1))
                 yield return i;
