@@ -45,7 +45,7 @@ namespace RayMitchell.ProjectEuler.Problems
                  from b in abundants
                  where b >= a
                  let s = a + b
-                 where (s <= max)
+                 where s <= max
                  select s)
                 .Distinct();
             
