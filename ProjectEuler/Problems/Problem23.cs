@@ -38,7 +38,7 @@ namespace RayMitchell.ProjectEuler.Problems
                 (from n in Enumerable.Range(1, max)
                  where n.ProperDivisors().Sum() > n
                  select n)
-                .ToArray(); // ToArray() to prevent double enumeration later
+                .ToArray(); // ToArray() prevents double enumeration later
 
             var abundantSums =
                 (from a in abundants
