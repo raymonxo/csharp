@@ -6,18 +6,19 @@ namespace RayMitchell.ProjectEuler.Problems
     {
         public static void Main()
         {
-            Console.WriteLine("Problem 11: " + Problem11.Solve());
-            Console.WriteLine("Problem 12: " + Problem12.Solve());
-            Console.WriteLine("Problem 13: " + Problem13.Solve1());
-            Console.WriteLine("Problem 14: " + Problem14.Solve());
-            Console.WriteLine("Problem 15: " + Problem15.Solve());
-            Console.WriteLine("Problem 16: " + Problem16.Solve());
-            Console.WriteLine("Problem 17: " + Problem17.Solve());
-            Console.WriteLine("Problem 18: " + Problem18.Solve());
-            Console.WriteLine("Problem 19: " + Problem19.Solve());
-            Console.WriteLine("Problem 20: " + Problem20.Solve());
-            Console.WriteLine("Problem 21: " + Problem21.Solve());
-            Console.WriteLine("Problem 22: " + Problem22.Solve());
+            Console.WriteLine("Problem 11: " + (Problem11.Solve() == 70600674));
+            Console.WriteLine("Problem 12: " + (Problem12.Solve() == 76576500));
+            Console.WriteLine("Problem 13: " + (Problem13.Solve() == "5537376230"));
+            Console.WriteLine("Problem 14: " + (Problem14.Solve() == 837799));
+            Console.WriteLine("Problem 15: " + (Problem15.Solve() == 137846528820));
+            Console.WriteLine("Problem 16: " + (Problem16.Solve() == 1366));
+            Console.WriteLine("Problem 17: " + (Problem17.Solve() == 21124));
+            Console.WriteLine("Problem 18: " + (Problem18.Solve() == 1074));
+            Console.WriteLine("Problem 19: " + (Problem19.Solve() == 171));
+            Console.WriteLine("Problem 20: " + (Problem20.Solve() == 648));
+            Console.WriteLine("Problem 21: " + (Problem21.Solve() == 31626));
+            Console.WriteLine("Problem 22: " + (Problem22.Solve() == 871198282));
+            Console.WriteLine("Problem 23: " + (Problem23.Solve() == 4179871));
         }
     }
 }

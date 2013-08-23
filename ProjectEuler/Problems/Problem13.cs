@@ -218,7 +218,7 @@ namespace RayMitchell.ProjectEuler.Problems
 53503534226472524250874054075591789781264330331690";
 
         // Solution #1 - Mix of LINQ query syntax and extension method syntax
-        public static string Solve1()
+        public static string Solve()
         {
             return (from n in Numbers.Split('\n')
                     select BigInteger.Parse(n))
