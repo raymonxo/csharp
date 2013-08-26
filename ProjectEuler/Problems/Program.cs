@@ -20,6 +20,7 @@ namespace RayMitchell.ProjectEuler.Problems
             Console.WriteLine("Problem 22: " + (Problem22.Solve() == 871198282));
             Console.WriteLine("Problem 23: " + (Problem23.Solve() == 4179871));
             Console.WriteLine("Problem 24: " + (Problem24.Solve() == 2783915460L));
+            Console.WriteLine("Problem 25: " + (Problem25.Solve() == 4782));
         }
     }
 }
