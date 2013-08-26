@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Numerics;
 
 using RayMitchell.ProjectEuler.Helpers;
@@ -217,24 +218,14 @@ namespace RayMitchell.ProjectEuler.Problems
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690";
 
-        // Solution #1 - Mix of LINQ query syntax and extension method syntax
-        public static string Solve()
+        public static long Solve()
         {
-            return (from n in Numbers.Split('\n')
-                    select BigInteger.Parse(n))
-                   .Sum()
-                   .ToString()
-                   .Substring(0, 10);
-        }
-
-        // Solution #2 - LINQ extension method syntax only
-        public static string Solve2()
-        {
-            return Numbers.Split('\n')
-                          .Select(BigInteger.Parse)
-                          .Sum()
-                          .ToString()
-                          .Substring(0, 10);
+            return Convert.ToInt64(
+                (from n in Numbers.Split('\n')
+                 select BigInteger.Parse(n))
+                .Sum()
+                .ToString()
+                .Substring(0, 10));
         }
     }
 }
