@@ -24,12 +24,12 @@ namespace RayMitchell.ProjectEuler.Problems
     {
         public static long Solve()
         {
-            var q = from n in Enumerable.Range(1, 9999)
-                    select new
-                    {
-                        N = n,
-                        D = n.ProperDivisors().Sum()
-                    };
+            var q = (from n in Enumerable.Range(1, 9999)
+                     select new
+                     {
+                         N = n,
+                         D = n.ProperDivisors().Sum()
+                     }).ToArray();
             return (from a in q
                     join b in q on a.D equals b.N
                     where b.D == a.N && a.N != b.N
