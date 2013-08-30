@@ -27,13 +27,13 @@ namespace RayMitchell.ProjectEuler.Problems
             var q = (from n in Enumerable.Range(1, 9999)
                      select new
                      {
-                         N = n,
-                         D = n.ProperDivisors().Sum()
+                         Number = n,
+                         DivisorSum = n.ProperDivisors().Sum()
                      }).ToArray();
             return (from a in q
-                    join b in q on a.D equals b.N
-                    where b.D == a.N && a.N != b.N
-                    select a.N).Sum();
+                    join b in q on a.DivisorSum equals b.Number
+                    where b.DivisorSum == a.Number && a.Number != b.Number
+                    select a.Number).Sum();
         }
     }
 }

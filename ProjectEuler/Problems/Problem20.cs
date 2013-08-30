@@ -24,8 +24,8 @@ namespace RayMitchell.ProjectEuler.Problems
             Func<int, BigInteger> factorial = null;
             factorial = n => n <= 1 ? 1 : n * factorial(n - 1);
 
-            return (int)(from c in factorial(100).ToString()
-                         select Char.GetNumericValue(c)).Sum();
+            return (from c in factorial(100).ToString()
+                    select (int)Char.GetNumericValue(c)).Sum();
         }
     }
 }
