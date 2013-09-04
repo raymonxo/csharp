@@ -37,8 +37,7 @@ namespace RayMitchell.ProjectEuler.Problems
             var abundants =
                 (from n in Enumerable.Range(1, max)
                  where n.ProperDivisors().Sum() > n
-                 select n)
-                .ToArray(); // ToArray() prevents double enumeration later
+                 select n).ToArray();
 
             var abundantSums =
                 (from a in abundants
@@ -46,8 +45,7 @@ namespace RayMitchell.ProjectEuler.Problems
                  where b >= a
                  let s = a + b
                  where s <= max
-                 select s)
-                .Distinct();
+                 select s).Distinct();
             
             return Enumerable.Range(1, max).Except(abundantSums).Sum();
         }
