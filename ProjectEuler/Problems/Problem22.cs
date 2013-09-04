@@ -29,7 +29,7 @@ namespace RayMitchell.ProjectEuler.Problems
                 .Split(new [] {'"', ','}, StringSplitOptions.RemoveEmptyEntries)
                 .OrderBy(n => n)
                 .Select((n, i) => new {Name = n, Position = i + 1})
-                .Sum(x => x.Position * x.Name.Sum(c => (int)c - (int)'A' + 1));
+                .Sum(x => x.Position * x.Name.Sum(c => c - 'A' + 1));
         }
     }
 }
