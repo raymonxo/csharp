@@ -42,7 +42,7 @@ namespace RayMitchell.ProjectEuler.Problems
             var abundantSums =
                 (from a in abundants
                  from b in abundants
-                 where b >= a
+                 where b <= a
                  let s = a + b
                  where s <= max
                  select s).Distinct();
