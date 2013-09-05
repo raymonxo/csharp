@@ -28,8 +28,8 @@ namespace RayMitchell.ProjectEuler.Problems
             return File.ReadAllText("names.txt")
                 .Split(new [] {'"', ','}, StringSplitOptions.RemoveEmptyEntries)
                 .OrderBy(n => n)
-                .Select((n, i) => new {Name = n, Position = i + 1})
-                .Sum(x => x.Position * x.Name.Sum(c => c - 'A' + 1));
+                .Select((n, i) => n.Sum(c => c - 'A' + 1) * (i + 1))
+                .Sum();
         }
     }
 }
